@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier validation Formulaire</title>
+    <style>
+        #d1 {
+            background-color: red;
+        }
+        .loginform{
+            width: 20%;
+            margin: auto;
+            padding: 10px;
+            margin-top: 100px;
+            border: 3px solid blue;
+        }
+    </style>
+    <script src="main.js"></script>
+    <script>
+        
+        function Afficher() {
+            var yes = document.getElementById("yes");
+            var no = document.getElementById("no");
+            var d1 = document.getElementById("d1");
+
+            if (yes.checked == true) {
+                d1.style.display = "block"
+            }
+            if (no.checked == true) {
+                d1.style.display = "none"
+            }
+        }
+
+        function test() {
+            var checkResult = true
+            var nameError = document.getElementById("nameError");
+            var passwordError = document.getElementById("passwordError");
+            var N = document.getElementById("name");
+            var p = document.getElementById("password");
+            var letters = /^[A-Za-z]+$/;
+            if (N.value.match(letters)) {
+                nameError.innerHTML = ""
+
+            }
+            else {
+                nameError.innerHTML = "Name Must contain letters only"
+                checkResult = false;
+            }
+
+            if (p.value.length >= 8) {
+                passwordError.innerHTML = ""
+
+            }
+            else {
+                passwordError.innerHTML = "Passwor must have atleast 8 caracters"
+                checkResult = false;
+            }
+            checkCountrySelected()
+            return checkResult
+        }
+        function checkCountrySelected() {
+            var yes = document.getElementById("yes");
+            var countriesSelect = document.getElementById("S1")
+            if (yes.checked == true) {
+                if (countriesSelect.selectedIndex > 0) {
+                    document.getElementById("selectError").innerHTML = ""
+                } else {
+                    document.getElementById("selectError").innerHTML = "You must select a country"
+                }
+            }else{
+                document.getElementById("selectError").innerHTML = ""
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <div class="loginform" id="divform">
+    <label> Nom </label> <input type="text" id="name" required> <label>(*)</label><br />
+    <p id="nameError"></p>
+    <br />
+    <label> Password </label> <input type="password" id="password" required /> <br />
+    <p id="passwordError"></p>
+    <br />
+    <div id="check">
+        <label>Afficher div </label> <span>Oui</span> <input type="radio" name="pr1" id="yes" onchange="Afficher()">
+        <span>Non</span> <input type="radio" name="pr1" id="no" checked="true" onchange="Afficher()">
+    </div>
+
+
+    <br /> <br />
+    <div id="d1" style="display: none;">
+        <label>Choisir une ville</label><select id="S1">
+            <option value="0">Selectinner Ville</option>
+            <option value="1">Morocco</option>
+            <option value="2">Algeria</option>
+            <option value="3">Spain</option>
+        </select>
+        <p id="selectError"></p>
+    </div>
+    
+    <br /> <br />
+    <input type="button" class="button" value="Se connecter" onclick="test()" />
+    <input type="button" class="button" value="Annuler">
+</div>
+
+</body>
+
+</html>
